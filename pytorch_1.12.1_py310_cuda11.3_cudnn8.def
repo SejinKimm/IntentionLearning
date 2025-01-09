@@ -1,0 +1,36 @@
+Bootstrap: docker
+From: nvidia/cuda:11.7.1-cudnn8-runtime-ubuntu22.04
+
+%post
+    # 비대화형 모드로 설정
+    export DEBIAN_FRONTEND=noninteractive
+
+    # 1) 기본 패키지 설치: software-properties-common (PPA 추가용)
+    apt-get update && apt-get install -y software-properties-common
+    apt-get install -y git
+    apt-get install -y ffmpeg
+    apt-get install -y feh
+
+    # 2) deadsnakes PPA 추가
+    #    (외부 접속이 막혀 있으면 여기서 실패할 수 있습니다.)
+    # add-apt-repository ppa:deadsnakes/ppa
+    # apt-get update
+
+    # 3) Python 3.10 + distutils 설치
+    apt-get install -y python3.10 python3.10-distutils
+
+    # 4) 로컬로 가져온 get-pip.py로 pip 설치
+    # python3.10 /scratch/sundong/get-pip.py
+
+    # (선택) pip, setuptools, wheel 업데이트
+    # python3.10 -m pip install --upgrade pip setuptools wheel
+
+%environment
+    # 쉘에서 python -> python3.10
+    # (주의: alias는 shell 상호작용에서만 동작하며, 스크립트에서는 안 먹힐 수 있음)
+    alias python=python3.10
+    # alias pip=pip3.10
+
+%runscript
+    # 컨테이너를 실행(run)하면 파이썬 버전 출력
+    exec python3.10 --version
