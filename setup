@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+# 1) ~/bin 디렉터리가 없으면 생성
+mkdir -p ~/bin
+
+# 2) 이미 존재하는 심볼릭 링크가 있다면 제거한 뒤 다시 생성 (안전하게)
+rm -f ~/bin/python3
+rm -f ~/bin/python
+rm -f ~/bin/pip3
+rm -f ~/bin/pip
+#rm -rf ~/.local
+
+# 3) PATH에 ~/bin 추가 (현재 세션에만 적용)
+export PATH="$HOME/bin:$PATH"
+
+echo "[INFO] Added '$HOME/bin' to PATH for this session"
+
+# 4) python -> /usr/bin/python3, pip -> /scratch/sundong/.local/bin/pip3.10
+ln -s /usr/bin/python3 ~/bin/python3
+ln -s ~/bin/python3 ~/bin/python
+python get-pip.py
+ln -s ~/.local/bin/pip3 ~/bin/pip3
+ln -s ~/bin/pip3 ~/bin/pip
+
+echo "[INFO] python, pip symlinks set up in ~/bin."
+echo "[INFO] python  -> /usr/bin/python3"
+echo "[INFO] pip     -> /scratch/sundong/sjkim/.local/bin/pip3"
+
+# 확인용
+echo "=== Checking versions ==="
+python --version
+pip --version
+
+echo "[INFO] Install requirements for PPO_Solve"
+
+cd PPO_Solve
+pip install -r requirements.txt
+
+#cd ../SOLAR-Generator
+#pip install -r requirements.txt
+
+#cd ../PPO_Solve
+
+echo "[INFO] Install requirements sucessfully"
+echo "[INFO] Run sample command for check ( python3 run.py train.task=150 eval.task=150 )"
+
