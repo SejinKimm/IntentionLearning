@@ -40,7 +40,7 @@ The script `0_run.sh` uses the `srun` command to allocate computing resources. U
 
 # --gres: Request GPU resources.
 # For example, to allocate 2 GPUs instead of 1, modify as follows:
---gres=gpu:2
+--gres=gpu:1
 ```
 
 ---
@@ -69,7 +69,7 @@ Thus, the final `srun` command in `0_run.sh` should look like:
 srun \
   --nodelist=dgx-a100-n4 \
   --nodes=1 \
-  --gres=gpu:2 \
+  --gres=gpu:1 \
   --exclusive \
   --pty \
   singularity shell \
