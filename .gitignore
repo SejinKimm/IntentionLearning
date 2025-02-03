@@ -1,0 +1,12 @@
+.local
+.cache
+.python_history
+.bash_history
+bin
+PPO_Solve/miniconda.sh
+PPO_Solve/.ipynb_checkpoints/
+PPO_Solve/__pycache__/
+PPO_Solve/outputs/
+PPO_Solve/ppo/.ipynb_checkpoints
+PPO_Solve/ppo/__pycache__/
+PPO_Solve/utils/__pycache__/
