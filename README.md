@@ -32,7 +32,7 @@ The script `0_run.sh` uses the `srun` command to allocate computing resources. U
 ```bash
 # --nodelist: Specify the exact node where the job will run.
 # Replace 'dgx-a100-n4' with your actual node name.
---nodelist=dgx-a100-n4
+--nodelist=dgx-a100-n2
 
 # --nodes: Define the number of nodes required for the job.
 # By default, the script uses one node.
@@ -40,7 +40,7 @@ The script `0_run.sh` uses the `srun` command to allocate computing resources. U
 
 # --gres: Request GPU resources.
 # For example, to allocate 2 GPUs instead of 1, modify as follows:
---gres=gpu:1
+--gres=gpu:2
 ```
 
 ---
@@ -67,9 +67,9 @@ Thus, the final `srun` command in `0_run.sh` should look like:
 
 ```bash
 srun \
-  --nodelist=dgx-a100-n4 \
+  --nodelist=dgx-a100-n2 \
   --nodes=1 \
-  --gres=gpu:1 \
+  --gres=gpu:2 \
   --exclusive \
   --pty \
   singularity shell \
