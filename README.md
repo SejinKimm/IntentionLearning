@@ -22,13 +22,13 @@ The script `0_run.sh` uses the `srun` command to allocate computing resources. U
 # --gres: Request GPU resources.
 # For example, to allocate 2 GPUs instead of 1, modify as follows:
 --gres=gpu:2
+```
 
 ### 3. **Update the Project Directory in `0_run.sh`**  
    Replace `/scratch/sundong/sjkim/IntentionLearning` in `0_run.sh` with the actual project directory path on your system.
 
 ### 4. **Set the Correct Path for the `.sif` File in `0_run.sh`**  
    Update the `.sif` file location in `0_run.sh` to point to its actual location on your system.
-
 ---
 
 ## Example Command for Running `0_run.sh`
@@ -37,4 +37,4 @@ After making the necessary modifications, you can run the script with the follow
 
 ```bash
 ./0_run.sh
-
+```
