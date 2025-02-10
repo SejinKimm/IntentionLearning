@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository builds upon **Decision Transformer (NeurIPS 2021)** and extends the work of **"Unraveling the ARC Puzzle: Mimicking Human Solutions with Object-Centric Decision Transformer" (ICML 2023 ILHF Workshop)**. 
+This repository builds upon **Decision Transformer (NeurIPS 2021)** and extends prior work on ARC tasks using object-centric decision transformers.
 
 In this study, we extract **popular states** from user trajectories and introduce **intention information** for each action to assess its impact on learning performance.
 
