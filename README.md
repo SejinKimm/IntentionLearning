@@ -1,0 +1,67 @@
+# Intention Learning with Decision Transformer
+
+## Overview
+
+This repository builds upon **Decision Transformer (NeurIPS 2021)** and extends the work of **"Unraveling the ARC Puzzle: Mimicking Human Solutions with Object-Centric Decision Transformer" (ICML 2023 ILHF Workshop)**. 
+
+In this study, we extract **popular states** from user trajectories and introduce **intention information** for each action to assess its impact on learning performance.
+
+## Installation
+
+This repository has been tested on **Ubuntu 22.04** with **Python 3.10**. To set up the environment, follow these steps:
+
+1. Download and extract the repository.
+2. Create and activate a new Conda environment.
+3. Install dependencies from `requirements.txt`.
+
+```sh
+unzip IntentionLearning-DT.zip  
+cd IntentionLearning-DT  
+conda create -n intention python=3.10  
+conda activate intention  
+pip install -r requirements.txt
+```
+
+## Running the Code
+
+### Data Preprocessing
+
+Although the dataset in this repository already contains **annotated intention information**, you can preprocess the data manually.
+
+```sh
+./0_preprocess.sh TASK_NAME TRAIN_OR_TEST
+```
+
+- `TASK_NAME`: Currently, only **dflip** is supported, representing a **5x5 diagonal flip task**.
+- `TRAIN_OR_TEST`: Specifies the dataset directory and can be one of the following: `train`, `test_0`, `test_1`, `test_2`, `test_3`, `test_4`.  
+
+### Training
+
+To train the model:
+
+```sh
+./1_train.sh TASK_NAME MODEL_NAME GPU_ID
+```
+
+- `TASK_NAME`: Currently, only **dflip** is supported.
+- `MODEL_NAME`: Specifies the model variant to use. The available options are:
+  - `default`: Standard **Decision Transformer (DT)** model.
+  - `pnp`: DT model augmented with **object information** from the previous study.
+  - `intention`: DT model augmented with **intention information**.
+  - `pnp_intention`: DT model augmented with both **object and intention information**.
+- `GPU_ID`: Specifies the GPU index to use during training.
+
+The training script runs for **400 epochs**, saving a checkpoint every **20 epochs**. Each time the model is saved, its performance is evaluated using **2,000 test samples from the `test_0` dataset**.
+
+### Evaluation
+
+To manually evaluate a trained model:
+
+```sh
+./2_test.sh TASK_NAME MODEL_NAME TEST_FOLDER_NUM GPU_ID  
+```
+
+- `TASK_NAME`: The name of the task (currently supports **dflip**).
+- `MODEL_NAME`: Specifies the trained model variant (`default`, `pnp`, `intention`, `pnp_intention`).
+- `TEST_FOLDER_NUM`: Specifies which **test dataset** (`test_0` to `test_4`) to use for evaluation.
+- `GPU_ID`: Specifies the GPU index to use.
