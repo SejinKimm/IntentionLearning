@@ -72,7 +72,7 @@ test_conf = TesterConfig(
 )
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-model = torch.load(args.ckpt_path, map_location=device)
+model = torch.load(args.ckpt_path, map_location=device, weights_only=False)
 
 tester = Tester(model, test_dataset, test_conf, args)
 
