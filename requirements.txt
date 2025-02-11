@@ -2,5 +2,6 @@ torch>=2.0
 numpy>=1.26
 matplotlib>=3.0
 numexpr>=2.10
-tqdm>=4.0
-wandb>=0.19
+tqdm
+wandb
+scikit-learn
