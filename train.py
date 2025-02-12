@@ -6,6 +6,7 @@ from minigpt.DT_ARC import GPT, GPTConfig
 from minigpt.trainer import Trainer, TrainerConfig, Train_StateActionReturnDataset
 
 
+
 ACTION_DIC={
     "start":0,
     "undo":1,
