@@ -44,5 +44,6 @@ python train.py \
     --task_name "$TASK_NAME" \
     --model_name "$MODEL_NAME"
 
+cp "./model/${TASK_NAME}/${TASK_NAME}_${MODEL_NAME}.pt ./model/${TASK_NAME}_${MODEL_NAME}.pt"
 
 export CUDA_VISIBLE_DEVICES=0
