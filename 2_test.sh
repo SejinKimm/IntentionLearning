@@ -30,6 +30,11 @@ echo "Using model: $MODEL_NAME"
 echo "Using GPU: $GPU_ID"
 echo "Using test data folder: test_$TEST_DATASET_NUM"
 
+echo "Add Python PATH $(pwd)"
+export PYTHONPATH=$(pwd)
+
+echo "Start Testing Task:$TASK_NAME with Model:$MODEL_NAME Dataset_No:$TEST_DATASET_NUM on GPU:$GPU_ID"
+
 if [ "$TEST_DATASET_NUM" -eq 0 ]; then
     for i in 1 2 3 4; do
         python src/test.py \
@@ -55,3 +60,5 @@ else
         --model_name $MODEL_NAME \
         --test_dataset_num $TEST_DATASET_NUM
 fi
+
+echo "Finish Testing Task:$TASK_NAME with Model:$MODEL_NAME Dataset_No:$TEST_DATASET_NUM on GPU:$GPU_ID"

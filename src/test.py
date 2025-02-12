@@ -2,9 +2,9 @@ import torch
 import logging
 import argparse
 
-from minigpt.utils import set_seed
-from minigpt.tester import Tester, TesterConfig, Test_StateActionReturnDataset
-from minigpt.PnP import *
+from src.minigpt.utils import set_seed
+from src.minigpt.tester import Tester, TesterConfig, Test_StateActionReturnDataset
+from src.minigpt.PnP import *
 
 ACTION_DIC={
     "start":0,

@@ -24,6 +24,10 @@ echo "Using task: $TASK_NAME"
 echo "Using model: $MODEL_NAME"
 echo "Using GPU: $GPU_ID"
 
+echo "Add Python PATH $(pwd)"
+export PYTHONPATH=$(pwd)
+
+echo "Start Training Task:$TASK_NAME with Model:$MODEL_NAME on GPU:$GPU_ID"
 python src/train.py \
     --seed 123 \
     --context_length 6 \
@@ -31,9 +35,9 @@ python src/train.py \
     --learning_rate 5e-4 \
     --batch_size 192 \
     --max_timestep 200 \
-    --data_dir_prefix "../dataset/${TASK_NAME}/" \
-    --train_data_folder 'train' \
-    --ckpt_path "../model/${TASK_NAME}/" \
+    --data_dir_prefix "./dataset/${TASK_NAME}/" \
+    --train_data_folder "train" \
+    --ckpt_path "./model/${TASK_NAME}/" \
     --save_cycle 20 \
     --n_embd 256 \
     --n_layer 16 \
@@ -42,8 +46,14 @@ python src/train.py \
     --grid_y 5 \
     --intention_size 8 \
     --task_name "$TASK_NAME" \
-    --model_name "$MODEL_NAME"
+    --model_name "$MODEL_NAME" \
+    --gpu_id $GPU_ID
 
+echo "Finish Training Task:$TASK_NAME with Model:$MODEL_NAME on GPU:$GPU_ID"
+
+echo "Copy Checkpoint Model to Final Model"
 cp "./model/${TASK_NAME}/${TASK_NAME}_${MODEL_NAME}.pt ./model/${TASK_NAME}_${MODEL_NAME}.pt"
+
+./2_test.sh $TASK_NAME $MODEL_NAME 0 $GPU_ID
 
 export CUDA_VISIBLE_DEVICES=0

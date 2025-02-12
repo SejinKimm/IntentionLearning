@@ -1,10 +1,9 @@
 import logging
 import argparse
 
-from minigpt.utils import set_seed
-from minigpt.DT_ARC import GPT, GPTConfig
-from minigpt.trainer import Trainer, TrainerConfig, Train_StateActionReturnDataset
-
+from src.minigpt.utils import set_seed
+from src.minigpt.DT_ARC import GPT, GPTConfig
+from src.minigpt.trainer import Trainer, TrainerConfig, Train_StateActionReturnDataset
 
 
 ACTION_DIC={
@@ -50,6 +49,7 @@ parser.add_argument('--ckpt_path', type=str, default='./model/')
 parser.add_argument('--save_cycle', type=int, default=200)
 parser.add_argument('--task_name', type=str, default='dflip')
 parser.add_argument('--model_name', type=str, default='default')
+parser.add_argument('--gpu_id', type=int, default=0)
 
 args = parser.parse_args()
 
@@ -69,6 +69,10 @@ train_dataset = Train_StateActionReturnDataset(
     step_gap=args.context_length, 
     action_dic=ACTION_DIC
 )
+
+print("train_dataset.data_path="+args.data_dir_prefix)
+print("train_dataset.data_type="+args.train_data_folder)
+print("train_dataset.step_gap="+str(args.context_length))
 
 mconf = GPTConfig(
     vocab_size=len(ACTION_DIC), 
@@ -101,6 +105,7 @@ tconf = TrainerConfig(
     model_name=args.model_name,
     use_pnp = args.model_name in ["pnp", "pnp_intention"],
     use_intention = args.model_name in ["intention", "pnp_intention"],
+    gpu_id = args.gpu_id,
 )
 
 model = GPT(mconf)

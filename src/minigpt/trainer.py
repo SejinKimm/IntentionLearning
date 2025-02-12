@@ -208,10 +208,10 @@ class Trainer:
                     
             if self.config.ckpt_path is not None and epoch%self.config.save_cycle==0:
                 self.save_checkpoint()
-                test_script = f"./2_test.sh {self.config.task_name} {self.config.model_name} 0 0"
+                test_script = f"./2_test.sh {self.config.task_name} {self.config.model_name} 1 {self.config.gpu_id}"
 
                 process = subprocess.run(test_script, shell=True, capture_output=True, text=True)
-                print(process.stdout)
+                #print(process.stdout)
                 print(process.stderr)
 
                 val_acc = float(process.stderr.strip().split()[-1]) if process.stderr.strip() else 0.0
