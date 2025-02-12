@@ -32,7 +32,7 @@ echo "Using test data folder: test_$TEST_DATASET_NUM"
 
 if [ "$TEST_DATASET_NUM" -eq 0 ]; then
     for i in 1 2 3 4; do
-        python test.py \
+        python src/test.py \
             --seed 123 \
             --context_length 5 \
             --batch_size 1 \
@@ -44,7 +44,7 @@ if [ "$TEST_DATASET_NUM" -eq 0 ]; then
             --test_dataset_num $i
     done
 else
-    python test.py \
+    python src/test.py \
         --seed 123 \
         --context_length 5 \
         --batch_size 1 \

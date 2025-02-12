@@ -11,4 +11,4 @@ if [ -z "$TRAIN_OR_TEST" ]; then
     TRAIN_OR_TEST=train
 fi
 
-python intention_preprocess.py "./dataset/$TASK_NAME/$TRAIN_OR_TEST"
+python src/intention_preprocess.py "./dataset/$TASK_NAME/$TRAIN_OR_TEST"

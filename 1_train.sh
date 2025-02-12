@@ -24,16 +24,16 @@ echo "Using task: $TASK_NAME"
 echo "Using model: $MODEL_NAME"
 echo "Using GPU: $GPU_ID"
 
-python train.py \
+python src/train.py \
     --seed 123 \
     --context_length 6 \
     --epochs 400 \
     --learning_rate 5e-4 \
     --batch_size 192 \
     --max_timestep 200 \
-    --data_dir_prefix "./dataset/${TASK_NAME}/" \
+    --data_dir_prefix "../dataset/${TASK_NAME}/" \
     --train_data_folder 'train' \
-    --ckpt_path "./model/${TASK_NAME}/" \
+    --ckpt_path "../model/${TASK_NAME}/" \
     --save_cycle 20 \
     --n_embd 256 \
     --n_layer 16 \
