@@ -51,13 +51,13 @@ To train the model:
 ./1_train.sh TASK_NAME MODEL_NAME GPU_ID
 ```
 
-- `TASK_NAME`: Currently, only **dflip** is supported.
-- `MODEL_NAME`: Specifies the model variant to use. The available options are:
+- `TASK_NAME`: Currently, only **dflip** is supported. *(default value: 'dflip')*
+- `MODEL_NAME`: Specifies the model variant to use. The available options are: *(default value: 'default')*
   - `default`: Standard **Decision Transformer (DT)** model.
   - `pnp`: DT model augmented with **object information** from the previous study.
   - `intention`: DT model augmented with **intention information**.
   - `pnp_intention`: DT model augmented with both **object and intention information**.
-- `GPU_ID`: Specifies the GPU index to use during training.
+- `GPU_ID`: Specifies the GPU index to use during training. *(default value: 0)*
 
 The training script runs for **400 epochs**, saving a checkpoint every **20 epochs**. Each time the model is saved, its performance is evaluated using **2,000 test samples from the `test_0` dataset**.
 
@@ -69,9 +69,9 @@ To manually evaluate a trained model:
 ./2_test.sh TASK_NAME MODEL_NAME TEST_DATASET_NUM GPU_ID  
 ```
 
-- `TASK_NAME`: The name of the task (currently supports **dflip**).
-- `MODEL_NAME`: Specifies the trained model variant (`default`, `pnp`, `intention`, `pnp_intention`).
-- `TEST_DATASET_NUM`: Specifies which **test dataset** to use for evaluation.  
-  - If `1` to `4`: Runs evaluation on `test_1` to `test_4` using the current training checkpoint model.  
-  - If `0`: Runs evaluation on **all test datasets (`test_1` to `test_5`)** using the fully trained model.
-- `GPU_ID`: Specifies the GPU index to use.
+- `TASK_NAME`: The name of the task (currently supports **dflip**). *(default value: 'dflip')*
+- `MODEL_NAME`: Specifies the trained model variant (`default`, `pnp`, `intention`, `pnp_intention`). *(default value: 'default')*
+- `TEST_DATASET_NUM`: Specifies which **test dataset** to use for evaluation. *(default value: 0)*
+  - If `1` to `4`: Runs evaluation on `test_1` to `test_4` using the current training checkpoint model (test with the checkpoint model from `./model/TASK_NAME/`).  
+  - If `0`: Runs evaluation on **all test datasets (`test_1` to `test_5`)** using the fully trained model (test the final model from `./model/`).
+- `GPU_ID`: Specifies the GPU index to use. *(default value: 0)*
