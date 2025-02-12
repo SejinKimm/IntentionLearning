@@ -66,10 +66,12 @@ The training script runs for **400 epochs**, saving a checkpoint every **20 epoc
 To manually evaluate a trained model:
 
 ```sh
-./2_test.sh TASK_NAME MODEL_NAME TEST_FOLDER_NUM GPU_ID  
+./2_test.sh TASK_NAME MODEL_NAME TEST_DATASET_NUM GPU_ID  
 ```
 
 - `TASK_NAME`: The name of the task (currently supports **dflip**).
 - `MODEL_NAME`: Specifies the trained model variant (`default`, `pnp`, `intention`, `pnp_intention`).
-- `TEST_FOLDER_NUM`: Specifies which **test dataset** (`test_0` to `test_4`) to use for evaluation.
+- `TEST_DATASET_NUM`: Specifies which **test dataset** to use for evaluation.  
+  - If `1` to `4`: Runs evaluation on `test_1` to `test_4` using the current training checkpoint model.  
+  - If `0`: Runs evaluation on **all test datasets (`test_1` to `test_5`)** using the fully trained model.
 - `GPU_ID`: Specifies the GPU index to use.
