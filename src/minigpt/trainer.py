@@ -193,16 +193,16 @@ class Trainer:
                     "loss/rtg_loss": loss_r.item(),
                 })            
 
-                if self.config.use_intention and loss_i is not None:
+                if self.config.use_intention:
                     wandb.log({"loss/intention_loss": loss_i.item()})
+                else:
+                    wandb.log({"loss/intention_loss": 0})
 
             return epoch_loss
 
         val_acc = 0.
         for epoch in range(config.max_epochs):
             epoch_loss = run_epoch('train', epoch_num=epoch, total_epoch=config.max_epochs)
-
-            wandb.log({"loss/epoch_loss": epoch_loss})
 
             scheduler.step()
                     
@@ -217,6 +217,7 @@ class Trainer:
                 val_acc = float(process.stderr.strip().split()[-1]) if process.stderr.strip() else 0.0
             wandb.log({
                 "metrics/epoch": epoch,
+                "metrics/epoch_loss": epoch_loss,
                 "metrics/val_acc": val_acc
             })
 
