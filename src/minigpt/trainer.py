@@ -215,6 +215,9 @@ class Trainer:
                 print(process.stderr)
 
                 val_acc = float(process.stderr.strip().split()[-1]) if process.stderr.strip() else 0.0
-            wandb.log({"metrics/val_acc": val_acc})
+            wandb.log({
+                "metrics/epoch": epoch,
+                "metrics/val_acc": val_acc
+            })
 
     
