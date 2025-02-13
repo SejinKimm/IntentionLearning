@@ -198,7 +198,7 @@ class Trainer:
 
             return epoch_loss
 
-
+        val_acc = 0.
         for epoch in range(config.max_epochs):
             epoch_loss = run_epoch('train', epoch_num=epoch, total_epoch=config.max_epochs)
 
@@ -215,7 +215,6 @@ class Trainer:
                 print(process.stderr)
 
                 val_acc = float(process.stderr.strip().split()[-1]) if process.stderr.strip() else 0.0
-                wandb.log({"metrics/val_acc": val_acc})
-
+            wandb.log({"metrics/val_acc": val_acc})
 
     
