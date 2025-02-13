@@ -18,7 +18,7 @@ if [ -z "$GPU_ID" ]; then
 fi
 
 if [ -z "$TEST_DATASET_NUM" ]; then
-    TEST_DATASET_NUM=0
+    TEST_DATASET_NUM=1
 fi
 
 if [ -n "$GPU_ID" ]; then

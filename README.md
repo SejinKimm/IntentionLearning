@@ -74,4 +74,4 @@ To manually evaluate a trained model:
 - `TEST_DATASET_NUM`: Specifies which **test dataset** to use for evaluation. *(default value: 0)*
   - If `1` to `4`: Runs evaluation on `test_1` to `test_4` using the current training checkpoint model (test with the checkpoint model from `./model/TASK_NAME/`).  
   - If `0`: Runs evaluation on **all test datasets (`test_1` to `test_4`)** using the fully trained model (test the final model from `./model/`).
-- `GPU_ID`: Specifies the GPU index to use. *(default value: 0)*
+- `GPU_ID`: Specifies the GPU index to use. *(default value: 1)*
