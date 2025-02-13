@@ -41,7 +41,7 @@ Although the dataset in this repository already contains **annotated intention i
 ```
 
 - `TASK_NAME`: Currently, only **dflip** is supported, representing a **5x5 diagonal flip task**.
-- `TRAIN_OR_TEST`: Specifies the dataset directory and can be one of the following: `train`, `test_0`, `test_1`, `test_2`, `test_3`, `test_4`.  
+- `TRAIN_OR_TEST`: Specifies the dataset directory and can be one of the following: `train`, `test_1`, `test_2`, `test_3`, `test_4`.  
 
 ### Training
 
@@ -59,7 +59,7 @@ To train the model:
   - `pnp_intention`: DT model augmented with both **object and intention information**.
 - `GPU_ID`: Specifies the GPU index to use during training. *(default value: 0)*
 
-The training script runs for **400 epochs**, saving a checkpoint every **20 epochs**. Each time the model is saved, its performance is evaluated using **2,000 test samples from the `test_0` dataset**.
+The training script runs for **400 epochs**, saving a checkpoint every **20 epochs**. Each time the model is saved, its performance is evaluated using **2,000 test samples from the `test_1` dataset**.
 
 ### Evaluation
 
@@ -73,5 +73,5 @@ To manually evaluate a trained model:
 - `MODEL_NAME`: Specifies the trained model variant (`default`, `pnp`, `intention`, `pnp_intention`). *(default value: 'default')*
 - `TEST_DATASET_NUM`: Specifies which **test dataset** to use for evaluation. *(default value: 0)*
   - If `1` to `4`: Runs evaluation on `test_1` to `test_4` using the current training checkpoint model (test with the checkpoint model from `./model/TASK_NAME/`).  
-  - If `0`: Runs evaluation on **all test datasets (`test_1` to `test_5`)** using the fully trained model (test the final model from `./model/`).
+  - If `0`: Runs evaluation on **all test datasets (`test_1` to `test_4`)** using the fully trained model (test the final model from `./model/`).
 - `GPU_ID`: Specifies the GPU index to use. *(default value: 0)*
