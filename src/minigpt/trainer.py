@@ -182,6 +182,10 @@ class Trainer:
                     optimizer.step()
                     pbar.set_description(f"Train| epoch: {epoch+1}/{total_epoch}, loss: {loss.item():.4f}, lr: {optimizer.param_groups[0]['lr']:.3e}")
 
+                if self.config.use_intention:
+                    loss_i_item = loss_i.item()
+                else:
+                    loss_i_item = 0.
 
                 wandb.log({
                     "etc/epoch": epoch_num,
@@ -191,12 +195,8 @@ class Trainer:
                     "loss/state_loss": loss_s.item(),
                     "loss/action_loss": loss_a.item(),
                     "loss/rtg_loss": loss_r.item(),
+                    "loss/intention_loss": loss_i_item
                 })            
-
-                if self.config.use_intention:
-                    wandb.log({"loss/intention_loss": loss_i.item()})
-                else:
-                    wandb.log({"loss/intention_loss": 0})
 
             return epoch_loss
 
